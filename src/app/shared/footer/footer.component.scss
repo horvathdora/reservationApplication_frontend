@@ -1,0 +1,17 @@
+
+$white: white;
+$dark-blue: #2c3e50 !default;
+$secondary: $dark-blue !default;
+$dark-green: #17473b;
+
+.footer {
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+    background-color: $dark-green;
+    color: $white;
+    width: 100%;
+  }
+  
+  .copyright {
+    background-color: darken($dark-green, 10%);
+  }

@@ -1,0 +1,29 @@
+
+<nav class="navbar navbar-expand-sm navbar-dark">
+  <div class="container">
+    <a class="navbar-brand navbar-expand-lg" href="">Apartmanok Turrachban</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav ml-auto" routerLinkActive="active">
+        <li class="nav-item pr-2">
+          
+          <a *ngIf="!authority" class="nav-link" routerLink='auth/register' href="#">Regisztráció</a>
+        </li>
+        <li *ngIf="!authority" class="nav-item pr-2">
+          <a class="nav-link" routerLink='auth/login' href="">Bejelentkezés</a>
+        </li>
+
+
+        <li *ngIf="authority === 'user'" class="nav-item">
+          <a class="nav-link" routerLink="user">User Board</a>
+        </li>
+        <li *ngIf="authority === 'admin'" class="nav-item">
+          <a class="nav-link" routerLink="admin">Admin Board</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
