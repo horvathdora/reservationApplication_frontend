@@ -24,8 +24,9 @@ export class RegisterComponent implements OnInit {
  
     this.signupInfo = new SignUpInfo(
       this.form.name,
-      this.form.lastName,
       this.form.firstName,
+      this.form.lastName,
+      this.form.username,
       this.form.email,
       this.form.password);
  

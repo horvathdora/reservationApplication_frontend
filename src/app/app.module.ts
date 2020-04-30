@@ -16,6 +16,7 @@ import { UserComponent } from './user/user.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { ApartmentsComponent } from './apartments/apartments.component';
+import { ApartmentService } from './apartments/apartments.service';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,7 @@ import { ApartmentsComponent } from './apartments/apartments.component';
     FormsModule,
     HttpClientModule
   ],
-  providers: [httpInterceptorProviders],
+  providers: [httpInterceptorProviders, ApartmentService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

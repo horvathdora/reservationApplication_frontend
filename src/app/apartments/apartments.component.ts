@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {Apartment} from './model/apartment';
+import { ApartmentService } from './apartments.service';
+import { Observable } from 'rxjs';
+import { Apartment } from './model/apartment';
 
 @Component({
   selector: 'app-apartments',
@@ -8,9 +10,24 @@ import {Apartment} from './model/apartment';
 })
 export class ApartmentsComponent implements OnInit {
 
-  constructor() { }
+  constructor(private apartmentService: ApartmentService) { }
 
-  ngOnInit(): void {
+  apartments: Apartment[];
+
+  getApartments(): void{
+    this.apartmentService.getAllApartments()
+    .subscribe(
+      data => {
+        this.apartments = data;
+        console.log(data);
+      },
+      error => {
+        console.log(error);
+      });
+  }
+
+  ngOnInit() {
+    this.getApartments();
   }
 
 }

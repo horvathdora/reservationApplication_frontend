@@ -1,1 +1,11 @@
-<p>apartments works!</p>
+<h1>Welcome to ApartmentsAPI</h1>
+<div>
+    <ul>
+        <li *ngFor="let apartment of apartments">
+          {{apartment.id}}
+          {{apartment.price}}
+          {{apartment.num_of_people}}
+          {{apartment.room_description}}
+        </li>
+      </ul>
+</div>

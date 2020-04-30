@@ -1,6 +1,6 @@
 export class Apartment{
-    id: string
-    price: number
-    numberOfPeople: BigInteger
-    shortDescription: string
+    public id: string
+    public price: number
+    public num_of_people: BigInteger
+    public room_description: string
 }
