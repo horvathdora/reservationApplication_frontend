@@ -1,0 +1,39 @@
+<div class="col-md-6 user-container">
+    <h2 style="margin: auto;">Foglalás </h2>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th class="hidden">Id</th>
+          <th>Foglalás kezdete</th>
+          <th>Foglalás vége</th>
+          <th>Létszám</th>
+          <th>Ár /éjszaka</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let reservation of reservations">
+          <td class="hidden">{{ reservation.id }}</td>
+          <td>{{ reservation.begin_date }}</td>
+          <td>{{ reservation.end_date }}</td>
+          <td>{{ reservation.num_of_people }}</td>
+          <td>{{ reservation.price }}</td>
+          <td>
+            <button class="btn btn-success" (click)="deleteReservation(reservation)" style="margin-left: 20px;">
+              Törlés
+            </button>
+          </td>
+          <td>
+            <button
+              class="btn btn-success"
+              (click)="editReservation(reservation)"
+              style="margin-left: 20px;"
+            >
+              Szerkesztés
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  

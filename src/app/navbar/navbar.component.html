@@ -7,24 +7,43 @@
     </button>
 
     <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav" routerLink="home">
+        
+      </ul>
+      
       <ul class="navbar-nav ml-auto" routerLinkActive="active">
-        <li class="nav-item pr-2">
-          
-          <a *ngIf="!authority" class="nav-link" routerLink='auth/register' href="#">Regisztráció</a>
+
+        <li class="nav-item pr-2">          
+          <a class="nav-link" routerLink='home' href="#">Kezdőlap</a>
+        </li>
+        
+        <li *ngIf="!authority"  class="nav-item pr-2">          
+          <a class="nav-link" routerLink='auth/register' href="#">Regisztráció</a>
         </li>
         <li *ngIf="!authority" class="nav-item pr-2">
           <a class="nav-link" routerLink='auth/login' href="">Bejelentkezés</a>
         </li>
 
 
-        <li *ngIf="authority === 'user'" class="nav-item">
+        <li *ngIf="authority && authority === 'user'" class="nav-item">
           <a class="nav-link" routerLink="user">User Board</a>
         </li>
-        <li *ngIf="authority === 'admin'" class="nav-item">
+        <li *ngIf="authority && authority === 'admin'" class="nav-item">
           <a class="nav-link" routerLink="admin">Admin Board</a>
         </li>
-        <li *ngIf="authority === 'admin'" class="nav-item">
-          <a class="nav-link" routerLink="admin/apartments">Apartments</a>
+        <li *ngIf="authority && authority === 'admin'" class="nav-item">
+          <a class="nav-link" routerLink="admin/apartments">Apartmanok</a>
+        </li>
+        <li *ngIf="authority && authority === 'admin'" class="nav-item">
+          <a class="nav-link" routerLink="admin/reservations">Foglalások</a>
+        </li>
+        <li *ngIf="authority && authority === 'admin'" class="nav-item">
+          <a class="nav-link" routerLink="admin/users">Felhasználók</a>
+        </li>
+        <br>
+        <hr>
+        <li *ngIf="authority" class="nav-item pr-2">
+          <a class="nav-link" routerLink='auth/login' (click)="logout()">Kijelentkezés</a>
         </li>
       </ul>
     </div>

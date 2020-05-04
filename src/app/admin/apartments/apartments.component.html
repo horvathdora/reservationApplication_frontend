@@ -1,0 +1,37 @@
+<div class="col-md-6 user-container">
+  <h2 style="margin: auto;">Apartment Details</h2>
+  <button class="btn btn-danger" style="width:150px" (click)="addApartment()">Új apartman</button>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th class="hidden">Id</th>
+        <th>Ár</th>
+        <th>Férőhely</th>
+        <th>Rövid leírás</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let apartment of apartments">
+        <td class="hidden">{{ apartment.id }}</td>
+        <td>{{ apartment.price }}</td>
+        <td>{{ apartment.num_of_people }}</td>
+        <td>{{ apartment.room_description }}</td>
+        <td>
+          <button class="btn btn-success" (click)="deleteApartment(apartment)" style="margin-left: 20px;">
+            Törlés
+          </button>
+        </td>
+        <td>
+          <button
+            class="btn btn-success"
+            (click)="editApartment(apartment)"
+            style="margin-left: 20px;"
+          >
+            Szerkesztés
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+

@@ -9,14 +9,26 @@ import { RegisterComponent } from './register/register.component';
 import { HomeComponent } from './home/home.component';
 import { UserComponent } from './user/user.component';
 import { AdminComponent } from './admin/admin.component';
-import { ApartmentsComponent } from './apartments/apartments.component';
+import { ApartmentsComponent } from './admin/apartments/apartments.component';
+import { AddApartmentComponent } from './admin/apartments/add-apatment/add-apartment/add-apartment/add-apartment.component';
+import { AuthGuard } from './auth/auth.guard';
+import { EditApartmentComponent } from './admin/apartments/edit-apartment/edit-apartment.component';
+import { ReservationsComponent } from './admin/reservations/reservations/reservations.component';
+import { UsersComponent } from './admin/users/users/users.component';
 
 
 const routes: Routes = [
   {path: 'home',  component: HomeComponent},
   {path: 'user',  component: UserComponent},
   {path: 'admin', component: AdminComponent},
-  {path: 'admin/apartments', component: ApartmentsComponent},
+  {path: 'admin/apartments', component: ApartmentsComponent, canActivate: [AuthGuard]},
+  {path: 'admin/add-apartment', component: AddApartmentComponent, canActivate: [AuthGuard]},
+  {path: 'admin/edit-apartment', component: EditApartmentComponent, canActivate: [AuthGuard]},
+
+  {path: 'admin/reservations', component: ReservationsComponent, canActivate: [AuthGuard]},
+
+  {path: 'admin/users', component: UsersComponent, canActivate: [AuthGuard]},
+
   {path: 'auth/login',component: LoginComponent},
   {path: 'auth/register', component: RegisterComponent},
   {path: '', redirectTo: "/home", pathMatch: "full"}

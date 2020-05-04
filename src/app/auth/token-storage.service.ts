@@ -12,9 +12,49 @@ export class TokenStorageService {
   constructor() { }
  
   signOut() {
-    window.sessionStorage.clear();
+    window.localStorage.clear();
+  }
+
+  public saveToken(token: string) {
+    localStorage.removeItem(TOKEN_KEY);
+    localStorage.setItem(TOKEN_KEY, token);
   }
  
+  public getToken(): string {
+    return localStorage.getItem(TOKEN_KEY);
+  }
+ 
+  public saveUsername(username: string) {
+    localStorage.removeItem(USERNAME_KEY);
+    localStorage.setItem(USERNAME_KEY, username);
+  }
+ 
+  public getUsername(): string {
+    return sessionStorage.getItem(USERNAME_KEY);
+  }
+ 
+  public saveAuthorities(authorities: string[]) {
+    localStorage.removeItem(AUTHORITIES_KEY);
+    localStorage.setItem(AUTHORITIES_KEY, JSON.stringify(authorities));
+  }
+ 
+  public getAuthorities(): string[] {
+    this.roles = [];
+ 
+    if (localStorage.getItem(TOKEN_KEY)) {
+      JSON.parse(localStorage.getItem(AUTHORITIES_KEY)).forEach(authority => {
+        this.roles.push(authority.authority);
+      });
+    }
+ 
+    return this.roles;
+  }
+
+  loggedIn(){
+    console.log(localStorage.getItem(TOKEN_KEY));
+    return !!localStorage.getItem(TOKEN_KEY);
+  }
+ /*
   public saveToken(token: string) {
     window.sessionStorage.removeItem(TOKEN_KEY);
     window.sessionStorage.setItem(TOKEN_KEY, token);
@@ -49,4 +89,5 @@ export class TokenStorageService {
  
     return this.roles;
   }
+  */
 }
