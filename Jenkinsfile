@@ -3,7 +3,7 @@ pipeline {
   stages {
     stage('Build') {
       steps {
-        build 'MavenApplication'
+        build(job: 'MavenApplication', wait: true)
         build(job: 'ApartmentFrontend', wait: true)
       }
     }
