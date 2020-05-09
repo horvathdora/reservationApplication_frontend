@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
+import { jqxDateTimeInputComponent } from 'jqwidgets-ng/jqxdatetimeinput';
 import { UserService } from '../services/user.service';
  
 @Component({
@@ -12,14 +13,9 @@ export class UserComponent implements OnInit {
  
   constructor(private userService: UserService) { }
  
+  
+
   ngOnInit() {
-    this.userService.getUserBoard().subscribe(
-      data => {
-        this.board = data;
-      },
-      error => {
-        this.errorMessage = `${error.status}: ${JSON.parse(error.error).message}`;
-      }
-    );
+   
   }
 }

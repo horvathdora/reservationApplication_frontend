@@ -29,8 +29,8 @@ export class AuthService {
     return this.http.post<string>(this.registerUrl, info, httpOptions);
   }
 
-  loggedIn(): Boolean{
-    console.log(localStorage.getItem('token'));
-    return !!localStorage.getItem('token');
+  loggedIn(): boolean{
+    console.log(sessionStorage.getItem('token'));
+    return !!sessionStorage.getItem('token');
   }
 }

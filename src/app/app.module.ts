@@ -1,6 +1,6 @@
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule } from "@angular/core";
 import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -25,6 +25,12 @@ import { ReservationService } from './admin/reservations/reservation.service';
 import { UsersComponent } from './admin/users/users/users.component';
 import { UsersService } from './admin/users/users.service';
 
+// Date time picker
+import { jqxDateTimeInputModule } from 'jqwidgets-ng/jqxdatetimeinput';
+import { AddReservationComponent } from './user/add-reservation/add-reservation.component';
+import { ListReservationsComponent } from './user/list-reservations/list-reservations.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -41,6 +47,8 @@ import { UsersService } from './admin/users/users.service';
     EditApartmentComponent,
     ReservationsComponent,
     UsersComponent,
+    AddReservationComponent,
+    ListReservationsComponent
   ],
   imports: [
     ReactiveFormsModule,
@@ -48,6 +56,9 @@ import { UsersService } from './admin/users/users.service';
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
+    jqxDateTimeInputModule,
+    NgbModule
+    
   ],
   providers: [
     httpInterceptorProviders,

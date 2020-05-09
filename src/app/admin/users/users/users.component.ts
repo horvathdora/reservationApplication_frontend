@@ -44,10 +44,6 @@ export class UsersComponent implements OnInit {
     });
   }
 
-  addUser(): void {
-    this.router.navigate(['auth/register']);
-  }
-
   ngOnInit() {
     this.getUsers();
   }

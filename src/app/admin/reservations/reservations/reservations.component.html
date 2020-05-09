@@ -17,6 +17,7 @@
           <td>{{ reservation.end_date }}</td>
           <td>{{ reservation.num_of_people }}</td>
           <td>{{ reservation.price }}</td>
+          <td>{{ reservation.user.username }}</td>
           <td>
             <button class="btn btn-success" (click)="deleteReservation(reservation)" style="margin-left: 20px;">
               Törlés

@@ -1,6 +1,101 @@
+<div class="justify-content-center d-flex">
+  <div class="col-10">
+    <h1 class="title">Apartmanok</h1>
+    <button
+      class="btn btn-lg btn-outline-primary"
+      (click)="addApartment(content)"
+    >
+      Új apartman
+    </button>
+    <div class="justify-content-center d-flex">
+      <table class="table table-striped">
+        <tr>
+          <th>Ár</th>
+          <th>Férőhely</th>
+          <th>Rövid leírás</th>
+          <th>Törlés</th>
+          <th>Szerkesztés</th>
+        </tr>
+        <tbody>
+        <tr *ngFor="let apartment of apartments">
+          <td style="word-wrap: break-word;">
+            <a>{{ apartment.price }}</a>
+          </td>
+          <td style="word-wrap: break-word;">
+            {{ apartment.num_of_people }}
+          </td>
+          <td style="word-wrap: break-word;">{{ apartment.room_description }}</td>
+
+          <td style="text-align: center;">
+            <button
+              class="btn btn-lg btn-danger"
+              (click)="deleteApartment(apartment)"
+            >
+              Törlés
+            </button>
+          </td>
+          <td style="text-align: center;">
+            <button
+              class="btn btn-lg btn-success"
+              (click)="editApartment(content, apartment)"
+            >
+              Szerkesztés
+            </button>
+          </td>
+        </tr>
+      </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<ng-template #content let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title">Popup</h4>
+    <button type="button" class="close" aria-label="Close" (click)="close()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <label for="price">Ár/éjszaka:</label>
+    <input
+      required
+      id="price"
+      class="form-control"
+      [(ngModel)]="newApartment.price"
+    />
+    <label for="room_description">Rövid leírás az apartmanról::</label>
+    <textarea
+      required
+      id="room_description"
+      class="form-control"
+      [(ngModel)]="newApartment.room_description"
+    >
+    </textarea>
+
+    <label for="num_of_people">Férőhely:</label>
+    <input
+      required
+      id="num_of_people"
+      type="number"
+      class="form-control"
+      [(ngModel)]="newApartment.num_of_people"
+    />
+  </div>
+  <div class="modal-footer">
+    <button type="submit" class="btn btn-secondary" (click)="onSubmit()">
+      Mentés
+    </button>
+    <button type="cancel" class="btn btn-secondary" (click)="close()">
+      Mégsem
+    </button>
+  </div>
+</ng-template>
+
+<!--
 <div class="col-md-6 user-container">
   <h2 style="margin: auto;">Apartment Details</h2>
-  <button class="btn btn-danger" style="width:150px" (click)="addApartment()">Új apartman</button>
+  <button class="btn btn-danger" style="width:150px" (click)="addApartment(content)">Új apartman</button>
   <table class="table table-striped">
     <thead>
       <tr>
@@ -35,3 +130,4 @@
   </table>
 </div>
 
+-->

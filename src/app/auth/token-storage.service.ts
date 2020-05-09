@@ -9,50 +9,60 @@ const AUTHORITIES_KEY = 'AuthAuthorities';
 })
 export class TokenStorageService {
   private roles: Array<string> = [];
+  private currentUserID: number;
   constructor() { }
  
+
   signOut() {
-    window.localStorage.clear();
+    window.sessionStorage.clear();
+  }
+
+  setCurrentUserID(id: number){
+    this.currentUserID = id;
+  }
+  
+  getCurrentUserID(): number{
+    return this.currentUserID;
   }
 
   public saveToken(token: string) {
-    localStorage.removeItem(TOKEN_KEY);
-    localStorage.setItem(TOKEN_KEY, token);
+    window.sessionStorage.removeItem(TOKEN_KEY);
+    window.sessionStorage.setItem(TOKEN_KEY, token);
   }
- 
+
   public getToken(): string {
-    return localStorage.getItem(TOKEN_KEY);
+    return sessionStorage.getItem(TOKEN_KEY);
   }
- 
+
   public saveUsername(username: string) {
-    localStorage.removeItem(USERNAME_KEY);
-    localStorage.setItem(USERNAME_KEY, username);
+    window.sessionStorage.removeItem(USERNAME_KEY);
+    window.sessionStorage.setItem(USERNAME_KEY, username);
   }
- 
+
   public getUsername(): string {
     return sessionStorage.getItem(USERNAME_KEY);
   }
- 
+
   public saveAuthorities(authorities: string[]) {
-    localStorage.removeItem(AUTHORITIES_KEY);
-    localStorage.setItem(AUTHORITIES_KEY, JSON.stringify(authorities));
+    window.sessionStorage.removeItem(AUTHORITIES_KEY);
+    window.sessionStorage.setItem(AUTHORITIES_KEY, JSON.stringify(authorities));
   }
- 
+
   public getAuthorities(): string[] {
     this.roles = [];
- 
-    if (localStorage.getItem(TOKEN_KEY)) {
-      JSON.parse(localStorage.getItem(AUTHORITIES_KEY)).forEach(authority => {
+
+    if (sessionStorage.getItem(TOKEN_KEY)) {
+      JSON.parse(sessionStorage.getItem(AUTHORITIES_KEY)).forEach(authority => {
         this.roles.push(authority.authority);
       });
     }
- 
+
     return this.roles;
   }
 
   loggedIn(){
-    console.log(localStorage.getItem(TOKEN_KEY));
-    return !!localStorage.getItem(TOKEN_KEY);
+    console.log(sessionStorage.getItem(TOKEN_KEY));
+    return !!sessionStorage.getItem(TOKEN_KEY);
   }
  /*
   public saveToken(token: string) {

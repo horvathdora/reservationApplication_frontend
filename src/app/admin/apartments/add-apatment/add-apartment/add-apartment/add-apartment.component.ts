@@ -25,7 +25,7 @@ export class AddApartmentComponent implements OnInit {
     });
   }
   onSubmit() {
-    this.apartmentService.create(this.addForm.value)
+    this.apartmentService.createApartment(this.addForm.value)
       .subscribe( data => {
         this.router.navigate(['admin/apartments']);
       });

@@ -13,23 +13,23 @@ export class ApartmentService {
 
   constructor(private http: HttpClient) { }
 
-  getAll(): Observable<Apartment[]>{
+  getAllApartments(): Observable<Apartment[]>{
     return this.http.get<Apartment[]>(apartmentUrl);
   }
 
-  get(id: number): Observable<Apartment> {
+  getApartment(id: number): Observable<Apartment> {
     return this.http.get<Apartment>(`${apartmentUrl}/${id}`);
   }
 
-  create(apartment: Apartment) {
-    return this.http.post(apartmentUrl, apartment);
+  createApartment(apartment: Apartment): Observable<Apartment> {
+    return this.http.post<Apartment>(apartmentUrl, apartment);
   }
 
-  update(apartment: Apartment, id: number): Observable<Apartment> {
+  updateApartment(apartment: Apartment, id: number): Observable<Apartment> {
     return this.http.put<Apartment>(`${apartmentUrl}/${id}`, apartment);
   }
 
-  delete(id: number) {
+  deleteApartment(id: number) {
     window.location.reload();
     return this.http.delete(`${apartmentUrl}/${id}`);
   }

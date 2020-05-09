@@ -1,0 +1,29 @@
+<p>list-reservations works!</p>
+<table class="table table-striped">
+    <thead>
+      <tr>
+        <th class="hidden">Id</th>
+        <th>Ár</th>
+        <th>Férőhely</th>
+        <th>Rövid leírás</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let reservation of reservations">
+        <td class="hidden">{{ reservation.id }}</td>
+        <td>{{ reservation.price }}</td>
+        <td>{{ reservation.num_of_people }}</td>
+        <td>{{ reservation.room_description }}</td>
+        <td>
+          <button
+            class="btn btn-info"
+            style="width: 150px;"
+            (click)="delete(reservation)"
+          >
+            Törlés
+          </button>
+        </td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>

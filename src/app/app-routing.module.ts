@@ -15,19 +15,22 @@ import { AuthGuard } from './auth/auth.guard';
 import { EditApartmentComponent } from './admin/apartments/edit-apartment/edit-apartment.component';
 import { ReservationsComponent } from './admin/reservations/reservations/reservations.component';
 import { UsersComponent } from './admin/users/users/users.component';
+import { AddReservationComponent } from './user/add-reservation/add-reservation.component';
+import { ListReservationsComponent } from './user/list-reservations/list-reservations.component';
 
 
 const routes: Routes = [
   {path: 'home',  component: HomeComponent},
-  {path: 'user',  component: UserComponent},
   {path: 'admin', component: AdminComponent},
   {path: 'admin/apartments', component: ApartmentsComponent, canActivate: [AuthGuard]},
   {path: 'admin/add-apartment', component: AddApartmentComponent, canActivate: [AuthGuard]},
   {path: 'admin/edit-apartment', component: EditApartmentComponent, canActivate: [AuthGuard]},
-
   {path: 'admin/reservations', component: ReservationsComponent, canActivate: [AuthGuard]},
-
   {path: 'admin/users', component: UsersComponent, canActivate: [AuthGuard]},
+
+  {path: 'user',  component: UserComponent},
+  {path: 'user/reservation', component: AddReservationComponent, canActivate: [AuthGuard]},
+  {path: 'user/list-reservation', component: ListReservationsComponent, canActivate: [AuthGuard]},
 
   {path: 'auth/login',component: LoginComponent},
   {path: 'auth/register', component: RegisterComponent},

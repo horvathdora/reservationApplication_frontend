@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { ApartmentService } from '../apartments.service';
 import { Apartment } from 'src/app/models/apartment';
 import {first} from "rxjs/operators";
@@ -12,6 +12,7 @@ import {first} from "rxjs/operators";
 })
 export class EditApartmentComponent implements OnInit {
   constructor(
+    private route: ActivatedRoute,
     private formBuilder: FormBuilder,
     private router: Router,
     private apartmentService: ApartmentService
@@ -28,7 +29,7 @@ export class EditApartmentComponent implements OnInit {
       this.router.navigate(['admin/apartments']);
       return;
     }    
-    this.apartmentService.get(+apartmentId).subscribe((data) => {
+    this.apartmentService.getApartment(+apartmentId).subscribe((data) => {
       //this.editForm.setValue(data.result);
       this.apartment = data;
       console.log(this.apartment);
@@ -46,7 +47,7 @@ export class EditApartmentComponent implements OnInit {
 
   onSubmit() {
     this.apartmentService
-      .update(this.editForm.value, this.apartment.id)
+      .updateApartment(this.editForm.value, this.apartment.id)
       .pipe(first())
       .subscribe(
         (data) => {

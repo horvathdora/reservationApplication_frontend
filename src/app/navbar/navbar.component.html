@@ -24,13 +24,14 @@
           <a class="nav-link" routerLink='auth/login' href="">Bejelentkezés</a>
         </li>
 
-
+        <!-- User navbar-->
         <li *ngIf="authority && authority === 'user'" class="nav-item">
-          <a class="nav-link" routerLink="user">User Board</a>
+          <a class="nav-link" routerLink="user/reservation">Új foglalás</a>
+        </li><li *ngIf="authority && authority === 'user'" class="nav-item">
+          <a class="nav-link" routerLink="user/list-reservation">Korábbi foglalásaim</a>
         </li>
-        <li *ngIf="authority && authority === 'admin'" class="nav-item">
-          <a class="nav-link" routerLink="admin">Admin Board</a>
-        </li>
+
+        <!-- Admin navbar-->
         <li *ngIf="authority && authority === 'admin'" class="nav-item">
           <a class="nav-link" routerLink="admin/apartments">Apartmanok</a>
         </li>
@@ -42,6 +43,8 @@
         </li>
         <br>
         <hr>
+
+        <!-- Logout -->
         <li *ngIf="authority" class="nav-item pr-2">
           <a class="nav-link" routerLink='auth/login' (click)="logout()">Kijelentkezés</a>
         </li>
