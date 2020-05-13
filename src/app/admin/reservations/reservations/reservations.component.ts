@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Reservation } from 'src/app/models/reservation';
-import { ReservationService } from '../reservation.service';
+import { ReservationService } from '../../../services/reservation.service';
 
 @Component({
   selector: 'app-reservations',
@@ -16,7 +16,8 @@ export class ReservationsComponent implements OnInit {
 
   reservations: Reservation[];
 
-  getApartments(): void {
+  // összes foglalás lekérése adatbázisból
+  getReservations(): void {
     this.reservationService.getAll().subscribe(
       (data) => {
         this.reservations = data;
@@ -28,6 +29,7 @@ export class ReservationsComponent implements OnInit {
     );
   }
   
+  // foglalás törlése
   deleteReservation(reservation: Reservation): void {
     this.reservationService.delete(reservation.id)
       .subscribe( data => {
@@ -35,19 +37,7 @@ export class ReservationsComponent implements OnInit {
       })
   };
 
-  //ezen még gondolkodom
-  editReservation(reservation: Reservation): void {
-    window.localStorage.removeItem("editReservationId");
-    window.localStorage.setItem("editReservationId", reservation.id.toString());
-    this.router.navigate(['admin/edit-reservation']);
-  };
-
-  //ez nem kell
-  addReservation(): void {
-    this.router.navigate(['admin/add-reservation']);
-  };
-
   ngOnInit() {
-    this.getApartments();
+    this.getReservations();
   }
 }

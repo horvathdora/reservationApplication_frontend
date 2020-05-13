@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Apartment } from '../../models/apartment';
+import { Apartment } from '../models/apartment';
 import { ApiResponse } from 'src/app/models/api-response';
 
 const apartmentUrl = 'http://localhost:8081/api/admin/apartments';

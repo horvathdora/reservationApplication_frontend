@@ -4,39 +4,36 @@ import { Observable } from 'rxjs';
 import { Reservation } from '../models/reservation';
 import { Apartment } from '../models/apartment';
 import { User } from '../models/user';
- 
+
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UserService {
- 
   private userUrl = 'http://localhost:8081/user';
- 
-  constructor(private http: HttpClient) { }
 
-  getReservationsByDate(start_date: string, end_date: string): Observable<Apartment[]>{
-    return this.http.get<Apartment[]>(`${this.userUrl}/reservation/apartments/${start_date}/${end_date}`);
+  constructor(private http: HttpClient) {}
+
+  getReservationsByDate(
+    start_date: string,
+    end_date: string
+  ): Observable<Apartment[]> {
+    return this.http.get<Apartment[]>(
+      `${this.userUrl}/reservation/apartments/${start_date}/${end_date}`
+    );
   }
-
 
   getReservations(username: string): Observable<Reservation[]> {
-    return this.http.get<Reservation[]>(`${this.userUrl}/${username}/reservations`);
+    return this.http.get<Reservation[]>(
+      `${this.userUrl}/${username}/reservations`
+    );
   }
 
-  addReservation(apartment: Apartment, username: string, start_date: string, end_date: string) {
-    console.log("ide is?");
-    return this.http.post(`${this.userUrl}/${username}/${start_date}/${end_date}`, apartment);    
-  }
-
-  test( username: string, reservation: Reservation){
-    return this.http.post(`${this.userUrl}/${username}`, reservation)
+  addReservation(username: string, reservation: Reservation) {
+    return this.http.post(`${this.userUrl}/${username}`, reservation);
   }
 
   deleteReservation(reservationID: number) {
     window.location.reload();
     return this.http.delete(`${this.userUrl}/reservations/${reservationID}`);
   }
-
-
-
 }

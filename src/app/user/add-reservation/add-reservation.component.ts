@@ -22,14 +22,10 @@ export class AddReservationComponent implements OnInit {
   start_date: Date;
   end_date: Date;
   dateSelected: boolean;
-
   display_start: string;
   display_end: string;
-
   apartments: Apartment[];
   selected_apartment: Apartment;
-
-  currentUser: User;
   newReservation: Reservation;
 
   @ViewChild('myDateTimeInput', { static: false })
@@ -74,25 +70,17 @@ export class AddReservationComponent implements OnInit {
   }
 
   bookApartment(apartment: Apartment) {
-    console.log("eljut ide");
+    console.log('eljut ide');
     this.newReservation = new Reservation();
-    this.newReservation.apartment = apartment; 
+    this.newReservation.apartment = apartment;
     this.newReservation.begin_date = this.start_date.getTime();
     this.newReservation.end_date = this.end_date.getTime();
     console.log(this.start_date.getTime());
-    
-    this.userService.test(
-      this.tokenStorage.getUsername(),
-      this.newReservation
-    ).subscribe();
 
-    /*
-    this.userService.addReservation(
-      apartment,
-      this.tokenStorage.getUsername(),
-      this.display_start,
-      this.display_end
-    );*/
+    this.userService
+      .addReservation(this.tokenStorage.getUsername(), this.newReservation)
+      .subscribe();
+      this.getApartments();
   }
 
   ngOnInit(): void {}

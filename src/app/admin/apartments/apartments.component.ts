@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ApartmentService } from './apartments.service';
+import { ApartmentService } from '../../services/apartments.service';
 import { Observable } from 'rxjs';
 import { Apartment } from '../../models/apartment';
 import { Router } from '@angular/router';
@@ -41,16 +41,6 @@ export class ApartmentsComponent implements OnInit {
       this.apartments = this.apartments.filter((a) => a !== apartment);
     });
   }
-  /*
-  editApartment(apartment: Apartment): void {
-    window.localStorage.removeItem("editApartmentId");
-    window.localStorage.setItem("editApartmentId", apartment.id.toString());
-    this.router.navigate(['admin/edit-apartment']);
-  };
-*/
-  //  addApartment(): void {
-  //    this.router.navigate(['admin/add-apartment']);
-  //  };
 
   ngOnInit() {
     this.getApartments();
@@ -58,8 +48,6 @@ export class ApartmentsComponent implements OnInit {
 
   addApartment(content) {
     this.new = true;
-    // this.selectedUser = {...this.originalUser};
-
     this.newApartment = new Apartment();
     this.modalService.open(content).result.then(
       (result) => {
@@ -74,7 +62,6 @@ export class ApartmentsComponent implements OnInit {
   editApartment(content, apartment: Apartment) {
     this.edit = true;
     this.newApartment = { ...apartment };
-
     this.modalService.open(content).result.then(
       (result) => {
         this.closeResult = `Closed with: ${result}`;
@@ -85,6 +72,7 @@ export class ApartmentsComponent implements OnInit {
     );
   }
 
+  // Megnézi miért zártuk be az ablakot
   private getDismissReason(reason: any): string {
     if (reason === ModalDismissReasons.ESC) {
       return 'by pressing ESC';
@@ -95,18 +83,22 @@ export class ApartmentsComponent implements OnInit {
     }
   }
 
-  //A módosított apartmant frissítjük a listában  
-    updateArray(newApartment){
-    let updateItem = this.apartments.find(this.findIndexToUpdate, newApartment.id);
+  //A módosított apartmant frissítjük a listában
+  updateArray(newApartment) {
+    let updateItem = this.apartments.find(
+      this.findIndexToUpdate,
+      newApartment.id
+    );
     let index = this.apartments.indexOf(updateItem);
     this.apartments[index] = newApartment;
   }
 
-  findIndexToUpdate(newApartment) { 
-        return newApartment.id === this;
+  findIndexToUpdate(newApartment) {
+    return newApartment.id === this;
   }
 
   onSubmit() {
+    // ha új apartmant adunk hozzá
     if (this.new) {
       this.apartmentService
         .createApartment(this.newApartment)
@@ -115,6 +107,7 @@ export class ApartmentsComponent implements OnInit {
         });
       this.new = false;
     }
+    // ha szerkesztünk egy apartmant
     if (this.edit) {
       this.apartmentService
         .updateApartment(this.newApartment, this.newApartment.id)
