@@ -1,29 +1,40 @@
-<p>list-reservations works!</p>
-<table class="table table-striped">
-    <thead>
-      <tr>
-        <th class="hidden">Id</th>
-        <th>Ár</th>
-        <th>Férőhely</th>
-        <th>Rövid leírás</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let reservation of reservations">
-        <td class="hidden">{{ reservation.id }}</td>
-        <td>{{ reservation.price }}</td>
-        <td>{{ reservation.num_of_people }}</td>
-        <td>{{ reservation.room_description }}</td>
-        <td>
-          <button
-            class="btn btn-info"
-            style="width: 150px;"
-            (click)="delete(reservation)"
-          >
-            Törlés
-          </button>
-        </td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
+<body>
+  <div class="justify-content-center d-flex">
+    <div class="col-10">
+      <h1 class="title">Foglalásaid</h1>
+      <div class="justify-content-center d-flex">
+        <table class="table table-striped table-responsive-lg">
+          <thead>
+            <tr>
+              <th></th>
+              <th>Foglalás kezdete</th>
+              <th>Foglalás vége</th>
+              <th>Férőhely</th>
+              <th>Ár /éjszaka</th>
+              <th>Teljes ár</th>
+              <th></th>
+          </thead>
+          <tbody>
+            <tr *ngFor="let reservation of reservations; index as i">
+              <td >{{ i+1 }}</td>
+              <td>{{ reservation.display_start }}</td>
+              <td>{{ reservation.display_end }}</td>
+              <td>{{ reservation.num_of_people }}</td>
+              <td>{{ reservation.price |number}}	Ft</td>
+              <td>{{ reservation.price * reservation.days | number}} Ft</td>
+              <td>
+                <button
+                  class="btn btn-danger"
+                  (click)="deleteReservation(reservation)"
+                  style="margin-left: 20px;"
+                >
+                  Törlés
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</body>

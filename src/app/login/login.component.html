@@ -1,13 +1,16 @@
 <body>
-  <div *ngIf="isLoggedIn; else loggedOut">Logged in as {{ roles }}.</div>
+  <!--
+  <div *ngIf="isLoggedIn; else loggedOut">You're logged in.</div>
 
   <ng-template #loggedOut>
+    -->
     <form
       class="text-center border border-darken-2 p-5"
       name="form"
       (ngSubmit)="f.form.valid && onSubmit()"
       #f="ngForm"
       novalidate
+      id="form"
     >
       <p class="h4 mb-4">Login</p>
 
@@ -54,7 +57,7 @@
           (click)="onSubmit()"
           href="javascript:void(0)"
           target=""
-          routerLink='/home'
+          routerLink="/home"
         >
           <span>Login</span>
         </a>
@@ -62,9 +65,8 @@
           Login failed: {{ errorMessage }}
         </div>
       </div>
-    </form>
-    <hr />
+      <hr />
     <p>Don't have an account?</p>
     <a routerLink="auth/register" class="btn btn-success">Sign Up</a>
-  </ng-template>
+  </form>
 </body>

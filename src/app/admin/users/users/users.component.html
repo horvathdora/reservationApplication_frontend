@@ -1,32 +1,53 @@
-<div class="col-md-6 user-container">
-    <h2 style="margin: auto;">Felhasználók</h2>
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th class="hidden">Id</th>
-          <th>Családnév</th>
-          <th>Becenév</th>
-          <th>Felhasználónév</th>
-          <th>E-mail</th>
-          <th>Jogosultság</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let user of users">
-          <td class="hidden">{{ user.id }}</td>
-          <td>{{ user.firstName }}</td>
-          <td>{{ user.lastName }}</td>
-          <td>{{ user.username }}</td>
-          <td>{{ user.email }}</td>
-          <td>{{ user.role }}</td>
-          <td>
-            <button class="btn btn-success" (click)="deleteUser(user)" style="margin-left: 20px;">
-              Törlés
-            </button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+<body>
+  <div class="justify-content-center d-flex">
+    <div class="col-10">
+      <h1 class="title">Felhasználók</h1>
+      <div class="justify-content-center d-flex">
+        <table class="table table-responsive-lg">
+          <thead>
+            <tr>
+              <th></th>
+              <th>Családnév</th>
+              <th>Becenév</th>
+              <th>Felhasználónév</th>
+              <th>E-mail</th>
+              <th>Jogosultság</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let user of users; index as i">
+              <td>
+                {{ i+1 }}
+              </td>
+              <td >
+                {{ user.firstName }}
+              </td>
+              <td>
+                {{ user.lastName }}
+              </td>
+              <td>
+                {{ user.username }}
+              </td>
+              <td>
+                {{ user.email }}
+              </td>
+              <td >
+                {{ user.role }}
+              </td>
+              <td >
+                <button
+                  class="btn btn-danger"
+                  (click)="deleteUser(user)"
+                  style="margin-left: 20px;"
+                >
+                  Törlés
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
   </div>
-  
-  
+</body>

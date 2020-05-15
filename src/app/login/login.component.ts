@@ -31,12 +31,15 @@ export class LoginComponent implements OnInit {
   }
  
   onSubmit() {
-    console.log(this.form);
+    //console.log(this.form);
  
     this.loginInfo = new AuthLoginInfo(
       this.form.username,
       this.form.password);
  
+    // bejelentkezési adatok ellenőrzése
+    // tokenek létrehozása
+    // engedélyek beállítása
     this.authService.attemptAuth(this.loginInfo).subscribe(
       data => {
         this.tokenStorage.saveToken(data.accessToken);

@@ -1,47 +1,46 @@
-<p>add-reservation works!</p>
-<p>book-reservation works!</p>
-<jqxDateTimeInput
-  #myDateTimeInput
-  (onChange)="dateOnChange()"
-  [width]="250"
-  [height]="30"
-  [selectionMode]="'range'"
->
-</jqxDateTimeInput>
-<div
-  #log
-  style="margin-top: 10px; font-size: 13px; font-family: Verdana;"
-></div>
-<div>
-  <h3>From: {{ display_start }}</h3>
-  <h3>From: {{ display_end }}</h3>
-</div>
+<body>
+  <div class="justify-content-center d-flex">
+    <div class="col-10">
+      <h1 class="title">Foglalások</h1>
+      <jqxDateTimeInput
+        #myDateTimeInput
+        (onChange)="dateOnChange()"
+        [width]="250"
+        [height]="30"
+        [selectionMode]="'range'"
+      >
+      </jqxDateTimeInput>
+      <div class="justify-content-center d-flex">
 
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th class="hidden">Id</th>
-      <th>Ár</th>
-      <th>Férőhely</th>
-      <th>Rövid leírás</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let apartment of apartments">
-      <td class="hidden">{{ apartment.id }}</td>
-      <td>{{ apartment.price }}</td>
-      <td>{{ apartment.num_of_people }}</td>
-      <td>{{ apartment.room_description }}</td>
-      <td>
-        <button
-          class="btn btn-info"
-          style="width: 150px;"
-          (click)="bookApartment(apartment)"
-        >
-          Foglalás
-        </button>
-      </td>
-      <td></td>
-    </tr>
-  </tbody>
-</table>
+        <table class="table table-striped table-responsive-lg">
+          <thead>
+            <tr>
+              <th></th>
+              <th>Ár</th>
+              <th>Férőhely</th>
+              <th>Rövid leírás</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let apartment of apartments; index as i">
+              <td >{{ i+1 }}</td>
+              <td>{{ apartment.price }}</td>
+              <td>{{ apartment.num_of_people }}</td>
+              <td>{{ apartment.room_description }}</td>
+              <td>
+                <button
+                  class="btn btn-success"
+                  style="width: 150px;"
+                  (click)="bookApartment(apartment)"
+                >
+                  Foglalás
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</body>

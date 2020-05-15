@@ -1,33 +1,43 @@
-<div class="col-md-6 user-container">
-    <h2 style="margin: auto;">Foglalás </h2>
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th class="hidden">Id</th>
-          <th>Foglalás kezdete</th>
-          <th>Foglalás vége</th>
-          <th>Létszám</th>
-          <th>Ár /éjszaka</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let reservation of reservations">
-          <td class="hidden">{{ reservation.id }}</td>
-          <td>{{ reservation.begin_date }}</td>
-          <td>{{ reservation.end_date }}</td>
-          <td>{{ reservation.num_of_people }}</td>
-          <td>{{ reservation.price }}</td>
-          <td>{{ reservation.user.username }}</td>
-          <td>
-            <button class="btn btn-success" (click)="deleteReservation(reservation)" style="margin-left: 20px;">
-              Törlés
-            </button>
-          </td>
-          <td>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+<body>
+  <div class="justify-content-center d-flex">
+    <div class="col-10">
+      <h1 class="title">Foglalások</h1>
+      <div class="justify-content-center d-flex">
+        <table class="table table-striped table-responsive-lg">
+          <thead>
+            <tr>
+              <th></th>
+              <th>Foglalás kezdete</th>
+              <th>Foglalás vége</th>
+              <th>Férőhely</th>
+              <th>Ár /éjszaka</th>
+              <th>Teljes ár</th>
+              <th>Felhasználó</th>
+              <th></th>
+          </thead>
+          <tbody>
+            <tr *ngFor="let reservation of reservations; index as i">
+              <td >{{ i+1 }}</td>
+              <td>{{ reservation.display_start }}</td>
+              <td>{{ reservation.display_end }}</td>
+              <td>{{ reservation.num_of_people }}</td>
+              <td>{{ reservation.price |number}}	Ft</td>
+              <td>{{ reservation.price * reservation.days | number}} Ft</td>
+              <td>{{ reservation.user.firstName}} {{reservation.user.lastName}}</td>
+              <td>
+                <button
+                  class="btn btn-danger"
+                  (click)="deleteReservation(reservation)"
+                  style="margin-left: 20px;"
+                >
+                  Törlés
+                </button>
+              </td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
   </div>
-  
-  
+</body>

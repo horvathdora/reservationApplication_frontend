@@ -9,6 +9,11 @@ export class Reservation {
   public end_date: number;
   public num_of_people: number;
   public price: number;
+  public display_start: string;
+  public display_end: string;
+  public days: number;
+  public totalPrice: string;
+
 
   constructor(){
     this.apartment = new Apartment();
