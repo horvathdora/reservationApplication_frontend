@@ -13,11 +13,11 @@ export class ReservationService {
   constructor(private http: HttpClient) { }
 
   getAll(): Observable<Reservation[]>{
-    return this.http.get<Reservation[]>(reservationUrl);
+    return <Observable<Reservation[]>>this.http.get(reservationUrl);
   }
 
   get(id: number): Observable<Reservation> {
-    return this.http.get<Reservation>(`${reservationUrl}/${id}`);
+    return <Observable<Reservation>>this.http.get(`${reservationUrl}/${id}`);
   }
 
   create(reservation: Reservation) {
@@ -25,7 +25,7 @@ export class ReservationService {
   }
 
   update(reservation: Reservation, id: number): Observable<Reservation> {
-    return this.http.put<Reservation>(`${reservationUrl}/${id}`, reservation);
+    return <Observable<Reservation>>this.http.put(`${reservationUrl}/${id}`, reservation);
   }
 
   delete(id: number) {

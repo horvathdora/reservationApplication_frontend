@@ -17,13 +17,13 @@ export class UserService {
     start_date: string,
     end_date: string
   ): Observable<Apartment[]> {
-    return this.http.get<Apartment[]>(
+    return <Observable<Apartment[]>>this.http.get(
       `${this.userUrl}/reservation/apartments/${start_date}/${end_date}`
     );
   }
 
   getReservations(username: string): Observable<Reservation[]> {
-    return this.http.get<Reservation[]>(
+    return <Observable<Reservation[]>>this.http.get(
       `${this.userUrl}/${username}/reservations`
     );
   }

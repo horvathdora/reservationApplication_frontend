@@ -14,19 +14,19 @@ export class ApartmentService {
   constructor(private http: HttpClient) { }
 
   getAllApartments(): Observable<Apartment[]>{
-    return this.http.get<Apartment[]>(apartmentUrl);
+    return <Observable<Apartment[]>>this.http.get(apartmentUrl);
   }
 
   getApartment(id: number): Observable<Apartment> {
-    return this.http.get<Apartment>(`${apartmentUrl}/${id}`);
+    return <Observable<Apartment>>this.http.get(`${apartmentUrl}/${id}`);
   }
 
   createApartment(apartment: Apartment): Observable<Apartment> {
-    return this.http.post<Apartment>(apartmentUrl, apartment);
+    return <Observable<Apartment>>this.http.post(apartmentUrl, apartment);
   }
 
   updateApartment(apartment: Apartment, id: number): Observable<Apartment> {
-    return this.http.put<Apartment>(`${apartmentUrl}/${id}`, apartment);
+    return <Observable<Apartment>>this.http.put(`${apartmentUrl}/${id}`, apartment);
   }
 
   deleteApartment(id: number) {

@@ -22,11 +22,11 @@ export class AuthService {
   }
  
   attemptAuth(credentials: AuthLoginInfo): Observable<JwtResponse> {
-    return this.http.post<JwtResponse>(this.loginUrl, credentials, httpOptions);
+    return <Observable<JwtResponse>>this.http.post(this.loginUrl, credentials, httpOptions);
   }
  
   signUp(info: SignUpInfo): Observable<string> {
-    return this.http.post<string>(this.registerUrl, info, httpOptions);
+    return <Observable<string>>this.http.post(this.registerUrl, info, httpOptions);
   }
 
   loggedIn(): boolean{

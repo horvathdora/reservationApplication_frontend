@@ -13,11 +13,11 @@ export class UsersService {
   constructor(private http: HttpClient) { }
 
   getAll(): Observable<User[]>{
-    return this.http.get<User[]>(userUrl);
+    return <Observable<User[]>>this.http.get(userUrl);
   }
 
   get(id: number): Observable<User> {
-    return this.http.get<User>(`${userUrl}/${id}`);
+    return <Observable<User>>this.http.get(`${userUrl}/${id}`);
   }
 
   create(user: User) {
@@ -25,7 +25,7 @@ export class UsersService {
   }
 
   update(user: User, id: number): Observable<User> {
-    return this.http.put<User>(`${userUrl}/${id}`, user);
+    return <Observable<User>>this.http.put(`${userUrl}/${id}`, user);
   }
 
   delete(id: number) {

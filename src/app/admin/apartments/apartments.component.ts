@@ -61,7 +61,7 @@ export class ApartmentsComponent implements OnInit {
 
   editApartment(content, apartment: Apartment) {
     this.edit = true;
-    this.newApartment = { ...apartment };
+    this.newApartment = { ...apartment }; //lemásoljuk az objektet
     this.modalService.open(content).result.then(
       (result) => {
         this.closeResult = `Closed with: ${result}`;
@@ -107,7 +107,7 @@ export class ApartmentsComponent implements OnInit {
         });
       this.new = false;
     }
-    // ha szerkesztünk egy apartmant
+    // ha szerkesztünk egy apartmant, akkor a megfelelő http kérést küldi el a szervernek
     if (this.edit) {
       this.apartmentService
         .updateApartment(this.newApartment, this.newApartment.id)
