@@ -2,5 +2,5 @@ projectKey=app:sonartest
 serverUrl=http://localhost:9000
 serverVersion=8.2.0.32929
 dashboardUrl=http://localhost:9000/dashboard?id=app%3Asonartest
-ceTaskId=AXHlGlG4WERrRtbfV6DR
-ceTaskUrl=http://localhost:9000/api/ce/task?id=AXHlGlG4WERrRtbfV6DR
+ceTaskId=AXIn7RpkqYVxiu-_as71
+ceTaskUrl=http://localhost:9000/api/ce/task?id=AXIn7RpkqYVxiu-_as71
