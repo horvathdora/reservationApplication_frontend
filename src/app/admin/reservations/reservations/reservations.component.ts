@@ -23,9 +23,11 @@ export class ReservationsComponent implements OnInit {
         this.reservations = data;
         console.log(data);
         this.reservations.forEach(element => {
+          //number-ből Date típus generálása
           this.variable_beginDate = new Date(element.begin_date);
           this.variable_endDate = new Date(element.end_date);        
 
+          // a dátumok és árak szép megjelenítése
           element.display_start = this.variable_beginDate.getFullYear() + '-' + (this.variable_beginDate.getMonth() + 1).toString() + '-' + this.variable_beginDate.getDate();
           element.display_end = this.variable_endDate.getFullYear() + '-' + (this.variable_endDate.getMonth() + 1).toString() + '-' + this.variable_endDate.getDate();
           element.days = this.variable_endDate.getDate() - this.variable_beginDate.getDate();

@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from 'src/app/services/user.service';
 import { Reservation } from 'src/app/models/reservation';
 import { TokenStorageService } from 'src/app/auth/token-storage.service';
 import { ReservationService } from 'src/app/services/reservation.service';
@@ -11,7 +10,7 @@ import { ReservationService } from 'src/app/services/reservation.service';
 })
 export class ListReservationsComponent implements OnInit {
 
-  constructor(private userService: UserService, 
+  constructor(
     private tokenStorage: TokenStorageService, 
     private reservationService: ReservationService) { }
 
@@ -20,7 +19,7 @@ export class ListReservationsComponent implements OnInit {
   variable_endDate: Date;
 
   get(): void {
-    this.userService.getReservations(this.tokenStorage.getUsername()).subscribe(
+    this.reservationService.getReservations(this.tokenStorage.getUsername()).subscribe(
       (data) => {
         this.reservations = data;
         this.reservations.forEach(element => {

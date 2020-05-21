@@ -62,7 +62,6 @@ export class TokenStorageService {
   }
 
   loggedIn() {
-    console.log(sessionStorage.getItem(TOKEN_KEY));
     return !!sessionStorage.getItem(TOKEN_KEY);
   }
 }

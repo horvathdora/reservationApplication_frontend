@@ -23,15 +23,15 @@ export class LoginComponent implements OnInit {
      private router: Router) { }
  
   ngOnInit() {
+    //Ha a felhasználó bejelentkezve van akkor átírányítja a kezdőoldalra
     if (this.tokenStorage.getToken()) {
       this.isLoggedIn = true;
-      this.roles = this.tokenStorage.getAuthorities();
+      this.roles = this.tokenStorage.getAuthorities();      
       this.router.navigate(['home']);
     }
   }
  
   onSubmit() {
-    //console.log(this.form);
  
     this.loginInfo = new AuthLoginInfo(
       this.form.username,
@@ -50,7 +50,7 @@ export class LoginComponent implements OnInit {
         this.isLoginFailed = false;
         this.isLoggedIn = true;
         this.roles = this.tokenStorage.getAuthorities();
-        
+        window.location.reload();
 
       },
       error => {

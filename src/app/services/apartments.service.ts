@@ -2,9 +2,10 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Apartment } from '../models/apartment';
-import { ApiResponse } from 'src/app/models/api-response';
 
 const apartmentUrl = 'http://localhost:8081/api/admin/apartments';
+const userUrl = 'http://localhost:8081/user';
+
 
 @Injectable({
   providedIn: 'root'
@@ -32,6 +33,18 @@ export class ApartmentService {
   deleteApartment(id: number) {
     window.location.reload();
     return this.http.delete(`${apartmentUrl}/${id}`);
+  }
+
+  
+  getApartmentsByDate(
+    start_date: string,
+    end_date: string
+  ): Observable<Apartment[]> {
+    console.log(`${userUrl}/reservation/apartments/${start_date}/${end_date}`);
+
+    return <Observable<Apartment[]>>this.http.get(
+      `${userUrl}/reservation/apartments/${start_date}/${end_date}`
+    );
   }
 
 }

@@ -13,7 +13,6 @@ import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 export class ApartmentsComponent implements OnInit {
   constructor(
     private apartmentService: ApartmentService,
-    private router: Router,
     private modalService: NgbModal
   ) {}
 
@@ -25,6 +24,7 @@ export class ApartmentsComponent implements OnInit {
   new = false;
   closeResult;
 
+  //lekéri és inicializálja az apartmanok listáját
   getApartments(): void {
     this.apartmentService.getAllApartments().subscribe(
       (data) => {
@@ -36,6 +36,8 @@ export class ApartmentsComponent implements OnInit {
       }
     );
   }
+
+  //törli a kiválasztott apartmant
   deleteApartment(apartment: Apartment): void {
     this.apartmentService.deleteApartment(apartment.id).subscribe((data) => {
       this.apartments = this.apartments.filter((a) => a !== apartment);
@@ -46,6 +48,7 @@ export class ApartmentsComponent implements OnInit {
     this.getApartments();
   }
 
+  //Új apartman hozzáadásához inicializálja a modal Servicet
   addApartment(content) {
     this.new = true;
     this.newApartment = new Apartment();
@@ -59,6 +62,7 @@ export class ApartmentsComponent implements OnInit {
     );
   }
 
+  //Apartman szerkesztéséhez inicializálja a modal servicet
   editApartment(content, apartment: Apartment) {
     this.edit = true;
     this.newApartment = { ...apartment }; //lemásoljuk az objektet

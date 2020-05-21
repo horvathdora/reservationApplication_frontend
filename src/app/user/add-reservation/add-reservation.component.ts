@@ -1,11 +1,10 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { jqxDateTimeInputComponent } from 'jqwidgets-ng/jqxdatetimeinput/public_api';
-import { UserService } from 'src/app/services/user.service';
 import { Apartment } from 'src/app/models/apartment';
-import { User } from 'src/app/models/user';
 import { TokenStorageService } from 'src/app/auth/token-storage.service';
 import { Reservation } from 'src/app/models/reservation';
-import { Router } from '@angular/router';
+import { ReservationService } from 'src/app/services/reservation.service';
+import { ApartmentService } from 'src/app/services/apartments.service';
 
 @Component({
   selector: 'app-add-reservation',
@@ -14,9 +13,9 @@ import { Router } from '@angular/router';
 })
 export class AddReservationComponent implements OnInit {
   constructor(
-    private userService: UserService,
-    private tokenStorage: TokenStorageService,
-    private router: Router
+    private reservationService: ReservationService,
+    private apartmentService: ApartmentService,
+    private tokenStorage: TokenStorageService
   ) {}
 
   start_date: Date;
@@ -32,19 +31,24 @@ export class AddReservationComponent implements OnInit {
   myDateTimeInput: jqxDateTimeInputComponent;
   @ViewChild('log', { static: false }) log: ElementRef;
   ngAfterViewInit(): void {
+    // dátumok inicializálása
     let date1 = new Date();
     let date2 = new Date();
     date2.setDate(date2.getDate() + 1);
+    //kezdő intervallum beállítása
     setTimeout((_) => this.myDateTimeInput.setRange(date1, date2));
+    //kezdő és vég dátum beállítása
     this.start_date = this.myDateTimeInput.getRange().from;
     this.end_date = this.myDateTimeInput.getRange().to;
   }
 
+  //Dátum változás esetén ez a fg hívodik meg
   dateOnChange(): void {
-    let selection = this.myDateTimeInput.getRange();
+    let selection = this.myDateTimeInput.getRange();  //intervallum lekérése
     if (selection.from != null) {
       this.start_date = this.myDateTimeInput.getRange().from;
       this.end_date = this.myDateTimeInput.getRange().to;
+      //dátumok string-é konvertálása, amit url-ben tudunk küldeni a backend-nek
       this.display_start =
         this.start_date.getFullYear().toString() +
         '-' +
@@ -62,24 +66,29 @@ export class AddReservationComponent implements OnInit {
   }
 
   getApartments() {
-    this.userService
-      .getReservationsByDate(this.display_start, this.display_end)
+    // adott időintervallumban elérhető apartmanok lekérése
+    //az időpontokat string-ként adom át a service-nek
+    this.apartmentService
+      .getApartmentsByDate(this.display_start, this.display_end)
       .subscribe((data) => {
         this.apartments = data;
       });
   }
 
+  // apartman lefoglalása az adott időintervallumban
   bookApartment(apartment: Apartment) {
-    console.log('eljut ide');
+    //új foglalás inicializálása
     this.newReservation = new Reservation();
     this.newReservation.apartment = apartment;
     this.newReservation.begin_date = this.start_date.getTime();
     this.newReservation.end_date = this.end_date.getTime();
-    console.log(this.start_date.getTime());
 
-    this.userService
+    // foglalás hozzáadása
+    this.reservationService
       .addReservation(this.tokenStorage.getUsername(), this.newReservation)
       .subscribe();
+
+      //elérhető apartmanok frissítése
       this.getApartments();
   }
 

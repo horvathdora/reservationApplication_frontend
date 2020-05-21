@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { TokenStorageService } from 'src/app/auth/token-storage.service';
 
 @Component({
@@ -10,23 +9,19 @@ import { TokenStorageService } from 'src/app/auth/token-storage.service';
 export class NavbarComponent implements OnInit {
   public roles: string[];
   public authority: string;
-  public page: string;
 
   constructor(
     private tokenStorage: TokenStorageService,
-    private router: Router
-  ) {
-    console.log(this.router.url);
-    this.page = this.router.url;
-  }
+  ) {}
 
   ngOnInit(): void {
     this.checkAuth();
   }
 
+  //felhasználó authorizációját ellenőrzi
   private checkAuth() {
     this.authority = undefined;
-    if (this.tokenStorage.getToken()) {
+    if (this.tokenStorage.getToken()) { //igaz - ha be van jelentkezve a felhasználó
       this.roles = this.tokenStorage.getAuthorities();
       this.roles.every((role) => {
         if (role === 'ROLE_ADMIN') {
@@ -40,6 +35,7 @@ export class NavbarComponent implements OnInit {
   }
 
   logout() {
+    //kilépteti a felhasználót
     this.tokenStorage.signOut();
     this.checkAuth();
   }

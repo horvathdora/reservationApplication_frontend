@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { User } from 'src/app/models/user';
 import { UsersService } from '../../../services/users.service';
 
@@ -9,14 +8,16 @@ import { UsersService } from '../../../services/users.service';
   styleUrls: ['./users.component.scss'],
 })
 export class UsersComponent implements OnInit {
-  constructor(private userService: UsersService, private router: Router) {}
+  constructor(private userService: UsersService) {}
 
   users: User[];
 
   getUsers(): void {
     this.userService.getAll().subscribe(
       (data) => {
+        //felhasználók lekérése
         this.users = data;
+        //minden felhasználónak beállítja, hogy Admin-e
         this.users.forEach((user) => {
           user.isAdmin = user.roles.every((role) => {
             if (role.name === 'ROLE_ADMIN') {
@@ -38,6 +39,7 @@ export class UsersComponent implements OnInit {
     );
   }
 
+  //felhasználó törlése ID alapján
   deleteUser(user: User): void {
     this.userService.delete(user.id).subscribe((data) => {
       this.users = this.users.filter((a) => a !== user);
